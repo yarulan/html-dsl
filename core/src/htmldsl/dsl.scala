@@ -31,9 +31,19 @@ trait DslBackend {
   def createTextNode(data: String): Text
 }
 
-class DslWord[T <: Element](tagName: String, backend: DslBackend) {
-  def apply(attrs: Attr*)(createChildNodes: => Unit): T = {
-    val element = backend.beginElement[T](tagName, attrs)
+class DslWord[T <: Element](tagName: String) {
+  def apply(attrs: Attr*)(createChildNodes: => Unit)(implicit backend: DslBackend): T = {
+    Dsl.tag(tagName, attrs: _*)(createChildNodes).asInstanceOf[T]
+  }
+
+  def apply(createChildNodes: => Unit)(implicit backend: DslBackend): T = apply()(createChildNodes)
+}
+
+object Dsl extends Dsl
+
+trait Dsl extends AttrKeys {
+  def tag(name: String, attrs: Attr*)(createChildNodes: => Unit)(implicit backend: DslBackend): Element = {
+    val element = backend.beginElement[Element](name, attrs)
     if (element != null) {
       backend.getElementUnderConstruction.foreach(_.appendChild(element))
     }
@@ -42,22 +52,18 @@ class DslWord[T <: Element](tagName: String, backend: DslBackend) {
       backend.setElementUnderConstruction(Some(element))
     }
     createChildNodes
-    backend.endElement(tagName)
+    backend.endElement(name)
     backend.setElementUnderConstruction(tmp)
     element
   }
 
-  def apply(createChildNodes: => Unit): T = apply()(createChildNodes)
-}
+  val div = new DslWord[HTMLDivElement]("div")
+  val form = new DslWord[HTMLFormElement]("form")
+  val label = new DslWord[HTMLLabelElement]("label")
+  val input = new DslWord[HTMLInputElement]("input")
+  val span = new DslWord[HTMLSpanElement]("span")
 
-class Dsl(backend: DslBackend) extends AttrKeys {
-  val div = new DslWord[HTMLDivElement]("div", backend)
-  val form = new DslWord[HTMLFormElement]("form", backend)
-  val label = new DslWord[HTMLLabelElement]("label", backend)
-  val input = new DslWord[HTMLInputElement]("input", backend)
-  val span = new DslWord[HTMLSpanElement]("span", backend)
-
-  def text(value: String): Text = {
+  def text(value: String)(implicit backend: DslBackend): Text = {
     backend.createTextNode(value)
   }
 }
