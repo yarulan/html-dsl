@@ -66,4 +66,6 @@ trait Dsl extends AttrKeys {
   def text(value: String)(implicit backend: DslBackend): Text = {
     backend.createTextNode(value)
   }
+
+  implicit def stringToAttrKey(s: String): AttrKey = AttrKey(s)
 }
