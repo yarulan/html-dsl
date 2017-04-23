@@ -1,6 +1,5 @@
 package htmldsl.string
 
-import htmldsl._
 import org.scalatest.{FunSuite, Matchers}
 
 class Test extends FunSuite with Matchers {

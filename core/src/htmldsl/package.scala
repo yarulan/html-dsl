@@ -1,5 +1,1 @@
-package object htmldsl extends Object
-  with Dsl
-{
-
-}
+package object htmldsl extends Imports
