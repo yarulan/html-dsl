@@ -1,9 +1,9 @@
-package htmldsl.backends.dom
+package htmldsl.dom
 
-import htmldsl.{Attr, DslBackend}
-import htmldsl.html.{Element, Text}
+import org.scalajs.dom.raw._
+import htmldsl.{Attr, Backend}
 
-object DomBackend extends DslBackend {
+object DomBackend extends Backend {
   private var elementUnderConstruction: Option[Element] = None
   override def setElementUnderConstruction(element: Option[Element]): Unit = {
     elementUnderConstruction = element

@@ -1,4 +1,4 @@
-import org.scalajs.jsenv.selenium.{SeleniumJSEnv, Firefox, Chrome}
+import org.scalajs.jsenv.selenium.{SeleniumJSEnv, Chrome}
 
 def defModule(dir: String, id: String = null): Project = Project(Option(id).getOrElse(dir), file(dir))
   .settings(
@@ -11,6 +11,10 @@ def defModule(dir: String, id: String = null): Project = Project(Option(id).getO
 
 lazy val core = defModule("core")
   .enablePlugins(ScalaJSPlugin)
+  .settings(
+    libraryDependencies ++= Seq(
+      "org.scala-js" %%% "scalajs-dom" % "0.9.1"
+    ))
 
 lazy val string = defModule("string")
   .dependsOn(core)
@@ -26,7 +30,7 @@ lazy val dom = defModule("dom")
   .settings(
     jsEnv in Test := new SeleniumJSEnv(Chrome()),
     libraryDependencies ++= Seq(
-      "org.scalatest" %% "scalatest" % "3.0.1" % "test"
+      "org.scalatest" %%% "scalatest" % "3.0.1" % "test"
     )
   )
 

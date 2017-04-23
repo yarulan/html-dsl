@@ -1,10 +1,10 @@
 package htmldsl.string
 
-import htmldsl.{Attr, DslBackend}
-import htmldsl.html.{Element, Text}
+import htmldsl.{Attr, Backend}
+import org.scalajs.dom.raw._
 import org.owasp.encoder.Encode
 
-class StringBackend extends DslBackend {
+class StringBackend extends Backend {
   val builder = new StringBuilder
 
   override def beginElement[T <: Element](tagName: String, attrs: Seq[Attr]): T = {
