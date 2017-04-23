@@ -1,7 +1,7 @@
 def defModule(dir: String, id: String = null): Project = Project(Option(id).getOrElse(dir), file(dir))
   .settings(
     scalaVersion := "2.11.8",
-    organization := "pro.ulan.htmldsl",
+    organization := "pro.ulan.html-dsl",
     version := "1.0-SNAPSHOT",
     scalaSource in Compile := baseDirectory.value / "src",
     scalaSource in Test := baseDirectory.value / "test"
