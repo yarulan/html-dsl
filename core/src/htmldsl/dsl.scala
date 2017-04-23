@@ -4,35 +4,6 @@ import org.scalajs.dom.raw._
 
 import scala.language.implicitConversions
 
-case class Attr(name: String, value: String)
-
-case class AttrKey(name: String) {
-  def :=(value: String): Attr = Attr(name, value)
-}
-
-trait AttrKeys {
-  val `class` = AttrKey("class")
-  val `for` = AttrKey("for")
-  val `type` = AttrKey("type")
-  val id = AttrKey("id")
-  val placeholder = AttrKey("placeholder")
-}
-
-trait Backend {
-  private var elementUnderConstruction: Option[Element] = None
-
-  def setElementUnderConstruction(element: Option[Element]): Unit = {
-    elementUnderConstruction = element
-  }
-
-  def getElementUnderConstruction: Option[Element] = elementUnderConstruction
-
-  def beginElement[T <: Element](tagName: String, attrs: Seq[Attr]): T
-  def endElement(tagName: String): Unit
-
-  def createTextNode(data: String): Text
-}
-
 class DslWord[T <: Element](tagName: String) {
   def apply(attrs: Attr*)(createChildNodes: => Unit)(implicit backend: Backend): T = {
     Dsl.tag(tagName, attrs: _*)(createChildNodes).asInstanceOf[T]
@@ -43,7 +14,10 @@ class DslWord[T <: Element](tagName: String) {
 
 object Dsl extends Dsl
 
-trait Dsl extends AttrKeys {
+trait Dsl extends Object
+  with Tags
+  with AttrKeys
+{
   def tag(name: String, attrs: Attr*)(createChildNodes: => Unit)(implicit backend: Backend): Element = {
     val element = backend.beginElement[Element](name, attrs)
     if (element != null) {
@@ -59,17 +33,13 @@ trait Dsl extends AttrKeys {
     element
   }
 
-  val div = new DslWord[HTMLDivElement]("div")
-  val form = new DslWord[HTMLFormElement]("form")
-  val label = new DslWord[HTMLLabelElement]("label")
-  val input = new DslWord[HTMLInputElement]("input")
-  val span = new DslWord[HTMLSpanElement]("span")
-
   def text(value: String)(implicit backend: Backend): Text = {
     val node = backend.createTextNode(value)
     backend.getElementUnderConstruction.foreach(_.appendChild(node))
     node
   }
 
-  implicit def stringToAttrKey(s: String): AttrKey = AttrKey(s)
+  implicit def stringToAttrKey(attrName: String): AttrKey = AttrKey(attrName)
+  implicit def stringToDslWord(tagName: String): DslWord[Element] = new DslWord[Element](tagName)
+  implicit def symbolToDslWord(tagName: Symbol): DslWord[Element] = new DslWord[Element](tagName.name)
 }

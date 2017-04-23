@@ -11,11 +11,12 @@ lazy val core = defModule("core")
   .enablePlugins(ScalaJSPlugin)
   .settings(
     libraryDependencies ++= Seq(
-      "org.scala-js" %%% "scalajs-dom" % "0.9.1"
+      "org.scala-js" %%% "scalajs-dom" % "0.9.1",
+      "org.scalatest" %%% "scalatest" % "3.0.1" % "test"
     ))
 
 lazy val string = defModule("string")
-  .dependsOn(core)
+  .dependsOn(core % "compile->compile;test->test")
   .settings(
     libraryDependencies ++= Seq(
       "org.owasp.encoder" % "encoder" % "1.2.1",
@@ -23,11 +24,10 @@ lazy val string = defModule("string")
     ))
 
 lazy val dom = defModule("dom")
-  .dependsOn(core)
+  .dependsOn(core % "compile->compile;test->test")
   .enablePlugins(ScalaJSPlugin)
   .settings(
     libraryDependencies ++= Seq(
-      "org.scalatest" %%% "scalatest" % "3.0.1" % "test"
     ),
     jsDependencies in Test += RuntimeDOM
   )
