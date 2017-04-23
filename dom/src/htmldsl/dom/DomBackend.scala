@@ -1,6 +1,7 @@
 package htmldsl.dom
 
 import org.scalajs.dom.raw._
+import org.scalajs.dom.document
 import htmldsl.{Attr, Backend}
 
 object DomBackend extends Backend {
@@ -12,11 +13,15 @@ object DomBackend extends Backend {
   override def getElementUnderConstruction: Option[Element] = elementUnderConstruction
 
   override def beginElement[T <: Element](tagName: String, attrs: Seq[Attr]): T = {
-    ???
+    val element = document.createElement(tagName).asInstanceOf[T]
+    attrs.foreach(attr => element.setAttribute(attr.name, attr.value))
+    element
   }
 
 
-  override def endElement(tagName: String): Unit = ???
+  override def endElement(tagName: String): Unit = {
+    // do nothing
+  }
 
-  override def createTextNode(data: String): Text = ???
+  override def createTextNode(data: String): Text = document.createTextNode(data)
 }

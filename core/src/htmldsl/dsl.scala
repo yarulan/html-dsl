@@ -66,7 +66,9 @@ trait Dsl extends AttrKeys {
   val span = new DslWord[HTMLSpanElement]("span")
 
   def text(value: String)(implicit backend: Backend): Text = {
-    backend.createTextNode(value)
+    val node = backend.createTextNode(value)
+    backend.getElementUnderConstruction.foreach(_.appendChild(node))
+    node
   }
 
   implicit def stringToAttrKey(s: String): AttrKey = AttrKey(s)
