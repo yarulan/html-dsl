@@ -12,7 +12,7 @@ lazy val core = defModule("core")
   .settings(
     libraryDependencies ++= Seq(
       "org.scala-js" %%% "scalajs-dom" % "0.9.1",
-      "org.scalatest" %%% "scalatest" % "3.0.1" % "test"
+      "org.scalatest" %%% "scalatest" % "3.0.1" % "provided"
     ))
 
 lazy val string = defModule("string")
@@ -28,6 +28,7 @@ lazy val dom = defModule("dom")
   .enablePlugins(ScalaJSPlugin)
   .settings(
     libraryDependencies ++= Seq(
+      "org.scalatest" %%% "scalatest" % "3.0.1" % "test"
     ),
     jsDependencies in Test += RuntimeDOM
   )
