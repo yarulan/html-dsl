@@ -1,5 +1,3 @@
-import org.scalajs.jsenv.selenium.{SeleniumJSEnv, Chrome}
-
 def defModule(dir: String, id: String = null): Project = Project(Option(id).getOrElse(dir), file(dir))
   .settings(
     scalaVersion := "2.11.8",
@@ -28,10 +26,10 @@ lazy val dom = defModule("dom")
   .dependsOn(core)
   .enablePlugins(ScalaJSPlugin)
   .settings(
-    jsEnv in Test := new SeleniumJSEnv(Chrome()),
     libraryDependencies ++= Seq(
       "org.scalatest" %%% "scalatest" % "3.0.1" % "test"
-    )
+    ),
+    jsDependencies in Test += RuntimeDOM
   )
 
 lazy val htmlDsl = defModule(".", "htmlDsl")
