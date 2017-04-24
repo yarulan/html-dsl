@@ -4,21 +4,13 @@ import org.scalajs.dom.raw._
 
 import scala.language.implicitConversions
 
-class DslWord[T <: Element](tagName: String) {
-  def apply(attrs: Attr*)(createChildNodes: => Unit)(implicit backend: Backend): T = {
-    Dsl.tag(tagName, attrs: _*)(createChildNodes).asInstanceOf[T]
-  }
-
-  def apply(createChildNodes: => Unit)(implicit backend: Backend): T = apply()(createChildNodes)
-}
-
 object Dsl extends Dsl
 
 trait Dsl extends Object
   with Tags
   with AttrKeys
 {
-  def tag(name: String, attrs: Attr*)(createChildNodes: => Unit)(implicit backend: Backend): Element = {
+  def tag(name: String, attrs: Seq[Attr], body: => Unit)(implicit backend: Backend): Element = {
     val element = backend.beginElement[Element](name, attrs)
     if (element != null) {
       backend.getElementUnderConstruction.foreach(_.appendChild(element))
@@ -27,10 +19,14 @@ trait Dsl extends Object
     if (element != null) {
       backend.setElementUnderConstruction(Some(element))
     }
-    createChildNodes
+    body
     backend.endElement(name)
     backend.setElementUnderConstruction(tmp)
     element
+  }
+
+  def tag(name: String, attrs: Seq[Attr])(implicit backend: Backend): Element = {
+    tag(name, attrs, {})
   }
 
   def text(value: String)(implicit backend: Backend): Text = {
