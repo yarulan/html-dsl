@@ -11,7 +11,19 @@ abstract class DslTest extends FreeSpec {
   val expectedHtml: String
 
   "Dsl should" - {
-    "render html" in {
+    "provide nice syntax for nodes without attributes" in {
+      val e = div {
+        span {
+          text("Hello")
+        }
+        span {
+          text("World")
+        }
+      }
+      check(e, """<div><span>Hello</span><span>World</span></div>""")
+    }
+
+    "provide nice syntax for nodes with attributes" in {
       val f = form(`class` := "form-horizontal", {
         div(`class` := "form-group", {
           val inputId = "email"
@@ -26,13 +38,25 @@ abstract class DslTest extends FreeSpec {
       check(f, expectedHtml)
     }
 
-    "allow custom tags" in {
-      val e = 'div({
-        'h1({
+    "allow to use symbols as tag names" in {
+      val e = 'div {
           text("Hello")
-        })
+      }
+      check(e, """<div>Hello</div>""")
+    }
+
+    "allow to use symbols as attribute keys" in {
+      val e = div('foo := "bar", {
+        text("Hello")
       })
-      check(e, """<div><h1>Hello</h1></div>""")
+      check(e, """<div foo="bar">Hello</div>""")
+    }
+
+    "allow to use strings as attribute keys" in {
+      val e = div("foo" := "bar", {
+        text("Hello")
+      })
+      check(e, """<div foo="bar">Hello</div>""")
     }
   }
 }

@@ -36,6 +36,9 @@ trait Dsl extends Object
   }
 
   implicit def stringToAttrKey(attrName: String): AttrKey = AttrKey(attrName)
+  implicit def symbolToAttrKey(symbol: Symbol): AttrKey = AttrKey(symbol.name)
   implicit def stringToDslWord(tagName: String): DslWord[Element] = new DslWord[Element](tagName)
   implicit def symbolToDslWord(tagName: Symbol): DslWord[Element] = new DslWord[Element](tagName.name)
+
+
 }
