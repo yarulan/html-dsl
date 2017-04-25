@@ -7,9 +7,21 @@ case class AttrKey(name: String) {
 }
 
 trait AttrKeys {
+  val lang = AttrKey("lang")
+  val charset = AttrKey("charset")
+  val rel = AttrKey("rel")
+  val href = AttrKey("href")
+
   val `class` = AttrKey("class")
-  val `for` = AttrKey("for")
+  val cls = `class`
+  val klass = `class`
+  val clazz = `class`
+
   val `type` = AttrKey("type")
+  val tpe = `type`
+
+
+
+  val `for` = AttrKey("for")
   val id = AttrKey("id")
-  val placeholder = AttrKey("placeholder")
-}
+  val placeholder = AttrKey("placeholder")}
