@@ -9,85 +9,85 @@ class DslWord[T <: Element](tagName: String) {
     Dsl.tag(tagName, Seq(), body).asInstanceOf[T]
   }
 
-  def apply(a1: Option[Attr], body: => Any)(implicit backend: Backend): T = {
-    Dsl.tag(tagName, Seq(a1).flatten, body).asInstanceOf[T]
+  def apply(a1: Attr, body: => Any)(implicit backend: Backend): T = {
+    Dsl.tag(tagName, Seq(a1), body).asInstanceOf[T]
   }
 
-  def apply(a1: Option[Attr], a2: Option[Attr], body: => Any)(implicit backend: Backend): T = {
-    Dsl.tag(tagName, Seq(a1, a2).flatten, body).asInstanceOf[T]
+  def apply(a1: Attr, a2: Attr, body: => Any)(implicit backend: Backend): T = {
+    Dsl.tag(tagName, Seq(a1, a2), body).asInstanceOf[T]
   }
 
-  def apply(a1: Option[Attr], a2: Option[Attr], a3: Option[Attr], body: => Any)(implicit backend: Backend): T = {
-    Dsl.tag(tagName, Seq(a1, a2, a3).flatten, body).asInstanceOf[T]
+  def apply(a1: Attr, a2: Attr, a3: Attr, body: => Any)(implicit backend: Backend): T = {
+    Dsl.tag(tagName, Seq(a1, a2, a3), body).asInstanceOf[T]
   }
 
-  def apply(a1: Option[Attr], a2: Option[Attr], a3: Option[Attr], a4: Option[Attr], body: => Any)(implicit backend: Backend): T = {
-    Dsl.tag(tagName, Seq(a1, a2, a3, a4).flatten, body).asInstanceOf[T]
+  def apply(a1: Attr, a2: Attr, a3: Attr, a4: Attr, body: => Any)(implicit backend: Backend): T = {
+    Dsl.tag(tagName, Seq(a1, a2, a3, a4), body).asInstanceOf[T]
   }
 
-  def apply(a1: Option[Attr], a2: Option[Attr], a3: Option[Attr], a4: Option[Attr], a5: Option[Attr], body: => Any)(implicit backend: Backend): T = {
-    Dsl.tag(tagName, Seq(a1, a2, a3, a4, a5).flatten, body).asInstanceOf[T]
+  def apply(a1: Attr, a2: Attr, a3: Attr, a4: Attr, a5: Attr, body: => Any)(implicit backend: Backend): T = {
+    Dsl.tag(tagName, Seq(a1, a2, a3, a4, a5), body).asInstanceOf[T]
   }
 
-  def apply(a1: Option[Attr], a2: Option[Attr], a3: Option[Attr], a4: Option[Attr], a5: Option[Attr], a6: Option[Attr], body: => Any)(implicit backend: Backend): T = {
-    Dsl.tag(tagName, Seq(a1, a2, a3, a4, a5, a6).flatten, body).asInstanceOf[T]
+  def apply(a1: Attr, a2: Attr, a3: Attr, a4: Attr, a5: Attr, a6: Attr, body: => Any)(implicit backend: Backend): T = {
+    Dsl.tag(tagName, Seq(a1, a2, a3, a4, a5, a6), body).asInstanceOf[T]
   }
 
-  def apply(a1: Option[Attr], a2: Option[Attr], a3: Option[Attr], a4: Option[Attr], a5: Option[Attr], a6: Option[Attr], a7: Option[Attr], body: => Any)(implicit backend: Backend): T = {
-    Dsl.tag(tagName, Seq(a1, a2, a3, a4, a5, a6, a7).flatten, body).asInstanceOf[T]
+  def apply(a1: Attr, a2: Attr, a3: Attr, a4: Attr, a5: Attr, a6: Attr, a7: Attr, body: => Any)(implicit backend: Backend): T = {
+    Dsl.tag(tagName, Seq(a1, a2, a3, a4, a5, a6, a7), body).asInstanceOf[T]
   }
 
-  def apply(a1: Option[Attr], a2: Option[Attr], a3: Option[Attr], a4: Option[Attr], a5: Option[Attr], a6: Option[Attr], a7: Option[Attr], a8: Option[Attr], body: => Any)(implicit backend: Backend): T = {
-    Dsl.tag(tagName, Seq(a1, a2, a3, a4, a5, a6, a7, a8).flatten, body).asInstanceOf[T]
+  def apply(a1: Attr, a2: Attr, a3: Attr, a4: Attr, a5: Attr, a6: Attr, a7: Attr, a8: Attr, body: => Any)(implicit backend: Backend): T = {
+    Dsl.tag(tagName, Seq(a1, a2, a3, a4, a5, a6, a7, a8), body).asInstanceOf[T]
   }
 
-  def apply(a1: Option[Attr], a2: Option[Attr], a3: Option[Attr], a4: Option[Attr], a5: Option[Attr], a6: Option[Attr], a7: Option[Attr], a8: Option[Attr], a9: Option[Attr], body: => Any)(implicit backend: Backend): T = {
-    Dsl.tag(tagName, Seq(a1, a2, a3, a4, a5, a6, a7, a8, a9).flatten, body).asInstanceOf[T]
+  def apply(a1: Attr, a2: Attr, a3: Attr, a4: Attr, a5: Attr, a6: Attr, a7: Attr, a8: Attr, a9: Attr, body: => Any)(implicit backend: Backend): T = {
+    Dsl.tag(tagName, Seq(a1, a2, a3, a4, a5, a6, a7, a8, a9), body).asInstanceOf[T]
   }
 
-  def apply(a1: Option[Attr], a2: Option[Attr], a3: Option[Attr], a4: Option[Attr], a5: Option[Attr], a6: Option[Attr], a7: Option[Attr], a8: Option[Attr], a9: Option[Attr], a10: Option[Attr], body: => Any)(implicit backend: Backend): T = {
-    Dsl.tag(tagName, Seq(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10).flatten, body).asInstanceOf[T]
+  def apply(a1: Attr, a2: Attr, a3: Attr, a4: Attr, a5: Attr, a6: Attr, a7: Attr, a8: Attr, a9: Attr, a10: Attr, body: => Any)(implicit backend: Backend): T = {
+    Dsl.tag(tagName, Seq(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10), body).asInstanceOf[T]
   }
 
   // Leaf elements
 
-  def apply(a1: Option[Attr])(implicit backend: Backend): T = {
-    Dsl.tag(tagName, Seq(a1).flatten).asInstanceOf[T]
+  def apply(a1: Attr)(implicit backend: Backend): T = {
+    Dsl.tag(tagName, Seq(a1)).asInstanceOf[T]
   }
 
-  def apply(a1: Option[Attr], a2: Option[Attr])(implicit backend: Backend): T = {
-    Dsl.tag(tagName, Seq(a1, a2).flatten).asInstanceOf[T]
+  def apply(a1: Attr, a2: Attr)(implicit backend: Backend): T = {
+    Dsl.tag(tagName, Seq(a1, a2)).asInstanceOf[T]
   }
 
-  def apply(a1: Option[Attr], a2: Option[Attr], a3: Option[Attr])(implicit backend: Backend): T = {
-    Dsl.tag(tagName, Seq(a1, a2, a3).flatten).asInstanceOf[T]
+  def apply(a1: Attr, a2: Attr, a3: Attr)(implicit backend: Backend): T = {
+    Dsl.tag(tagName, Seq(a1, a2, a3)).asInstanceOf[T]
   }
 
-  def apply(a1: Option[Attr], a2: Option[Attr], a3: Option[Attr], a4: Option[Attr])(implicit backend: Backend): T = {
-    Dsl.tag(tagName, Seq(a1, a2, a3, a4).flatten).asInstanceOf[T]
+  def apply(a1: Attr, a2: Attr, a3: Attr, a4: Attr)(implicit backend: Backend): T = {
+    Dsl.tag(tagName, Seq(a1, a2, a3, a4)).asInstanceOf[T]
   }
 
-  def apply(a1: Option[Attr], a2: Option[Attr], a3: Option[Attr], a4: Option[Attr], a5: Option[Attr])(implicit backend: Backend): T = {
-    Dsl.tag(tagName, Seq(a1, a2, a3, a4, a5).flatten).asInstanceOf[T]
+  def apply(a1: Attr, a2: Attr, a3: Attr, a4: Attr, a5: Attr)(implicit backend: Backend): T = {
+    Dsl.tag(tagName, Seq(a1, a2, a3, a4, a5)).asInstanceOf[T]
   }
 
-  def apply(a1: Option[Attr], a2: Option[Attr], a3: Option[Attr], a4: Option[Attr], a5: Option[Attr], a6: Option[Attr])(implicit backend: Backend): T = {
-    Dsl.tag(tagName, Seq(a1, a2, a3, a4, a5, a6).flatten).asInstanceOf[T]
+  def apply(a1: Attr, a2: Attr, a3: Attr, a4: Attr, a5: Attr, a6: Attr)(implicit backend: Backend): T = {
+    Dsl.tag(tagName, Seq(a1, a2, a3, a4, a5, a6)).asInstanceOf[T]
   }
 
-  def apply(a1: Option[Attr], a2: Option[Attr], a3: Option[Attr], a4: Option[Attr], a5: Option[Attr], a6: Option[Attr], a7: Option[Attr])(implicit backend: Backend): T = {
-    Dsl.tag(tagName, Seq(a1, a2, a3, a4, a5, a6, a7).flatten).asInstanceOf[T]
+  def apply(a1: Attr, a2: Attr, a3: Attr, a4: Attr, a5: Attr, a6: Attr, a7: Attr)(implicit backend: Backend): T = {
+    Dsl.tag(tagName, Seq(a1, a2, a3, a4, a5, a6, a7)).asInstanceOf[T]
   }
 
-  def apply(a1: Option[Attr], a2: Option[Attr], a3: Option[Attr], a4: Option[Attr], a5: Option[Attr], a6: Option[Attr], a7: Option[Attr], a8: Option[Attr])(implicit backend: Backend): T = {
-    Dsl.tag(tagName, Seq(a1, a2, a3, a4, a5, a6, a7, a8).flatten).asInstanceOf[T]
+  def apply(a1: Attr, a2: Attr, a3: Attr, a4: Attr, a5: Attr, a6: Attr, a7: Attr, a8: Attr)(implicit backend: Backend): T = {
+    Dsl.tag(tagName, Seq(a1, a2, a3, a4, a5, a6, a7, a8)).asInstanceOf[T]
   }
 
-  def apply(a1: Option[Attr], a2: Option[Attr], a3: Option[Attr], a4: Option[Attr], a5: Option[Attr], a6: Option[Attr], a7: Option[Attr], a8: Option[Attr], a9: Option[Attr])(implicit backend: Backend): T = {
-    Dsl.tag(tagName, Seq(a1, a2, a3, a4, a5, a6, a7, a8, a9).flatten).asInstanceOf[T]
+  def apply(a1: Attr, a2: Attr, a3: Attr, a4: Attr, a5: Attr, a6: Attr, a7: Attr, a8: Attr, a9: Attr)(implicit backend: Backend): T = {
+    Dsl.tag(tagName, Seq(a1, a2, a3, a4, a5, a6, a7, a8, a9)).asInstanceOf[T]
   }
 
-  def apply(a1: Option[Attr], a2: Option[Attr], a3: Option[Attr], a4: Option[Attr], a5: Option[Attr], a6: Option[Attr], a7: Option[Attr], a8: Option[Attr], a9: Option[Attr], a10: Option[Attr])(implicit backend: Backend): T = {
-    Dsl.tag(tagName, Seq(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10).flatten).asInstanceOf[T]
+  def apply(a1: Attr, a2: Attr, a3: Attr, a4: Attr, a5: Attr, a6: Attr, a7: Attr, a8: Attr, a9: Attr, a10: Attr)(implicit backend: Backend): T = {
+    Dsl.tag(tagName, Seq(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10)).asInstanceOf[T]
   }
 }

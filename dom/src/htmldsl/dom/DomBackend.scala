@@ -2,7 +2,7 @@ package htmldsl.dom
 
 import org.scalajs.dom.raw._
 import org.scalajs.dom.document
-import htmldsl.{Attr, Backend}
+import htmldsl.{Attr, Backend, NoAttr}
 
 object DomBackend extends Backend {
   private var elementUnderConstruction: Option[Element] = None
@@ -14,7 +14,12 @@ object DomBackend extends Backend {
 
   override def beginElement[T <: Element](tagName: String, attrs: Seq[Attr]): T = {
     val element = document.createElement(tagName).asInstanceOf[T]
-    attrs.foreach(attr => element.setAttribute(attr.name, attr.value.getOrElse("")))
+    attrs.foreach {
+      case NoAttr =>
+      // Do nothing
+      case Attr(name, value) =>
+        element.setAttribute(name, value.getOrElse(""))
+    }
     element
   }
 

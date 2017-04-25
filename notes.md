@@ -21,3 +21,16 @@ var onclick: js.Function1[MouseEvent, _] = js.native
 ```
 Which makes it impossible to subclass since all those `js.native` calls
 throw exceptions in constructors.
+
+## Conditional attributes
+A special object `NoAttr` was introduced for conditional attributes support.
+The approach with `Option[Attr]` didn't look nice
+```
+class DslWord {
+  def apply(a1: Option[Attr], a2: Option[Attr])
+}
+
+trait AttrKeys {
+  val disabled = Some(Attr("disabled"))
+}
+```

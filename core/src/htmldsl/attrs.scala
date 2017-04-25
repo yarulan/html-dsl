@@ -6,9 +6,11 @@ object Attr {
 
 case class Attr(name: String, value: Option[String])
 
+object NoAttr extends Attr("noattr", None)
+
 case class AttrKey(name: String) {
-  def :=(value: String): Option[Attr] = Some(Attr(name, Some(value)))
-  def :=(value: Option[String]): Option[Attr] = value.map(value => Attr(name, Some(value)))
+  def :=(value: String): Attr = Attr(name, Some(value))
+  def :=(value: Option[String]): Attr = value.map(value => Attr(name, Some(value))).getOrElse(NoAttr)
 }
 
 trait AttrKeys {
