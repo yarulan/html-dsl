@@ -76,5 +76,10 @@ abstract class DslTest extends FreeSpec {
     "support attributes without values" in {
       check(input(disabled), """<input disabled></input>""", """<input disabled="">""")
     }
+
+    "support conditional rendering of attributes without values" in {
+      check(input(disabled := true), """<input disabled></input>""", """<input disabled="">""")
+      check(input(disabled := false), """<input></input>""", """<input>""")
+    }
   }
 }

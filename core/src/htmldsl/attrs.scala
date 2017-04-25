@@ -1,16 +1,23 @@
 package htmldsl
 
 object Attr {
-  def apply(name: String): Attr = Attr(name, None)
+  def apply(name: String, value: String): ValuedAttr = ValuedAttr(name, value)
+  def apply(name: String): NoValueAttr = NoValueAttr(name)
 }
 
-case class Attr(name: String, value: Option[String])
+sealed trait Attr
 
-object NoAttr extends Attr("noattr", None)
+case class ValuedAttr(name: String, value: String) extends Attr
+
+case class NoValueAttr(name: String) extends Attr {
+  def :=(rendered: Boolean): Attr = if (rendered) this else NoAttr
+}
+
+object NoAttr extends Attr
 
 case class AttrKey(name: String) {
-  def :=(value: String): Attr = Attr(name, Some(value))
-  def :=(value: Option[String]): Attr = value.map(value => Attr(name, Some(value))).getOrElse(NoAttr)
+  def :=(value: String): ValuedAttr = Attr(name, value)
+  def :=(value: Option[String]): Attr = value.map(value => Attr(name, value)).getOrElse(NoAttr)
 }
 
 trait AttrKeys {
@@ -30,7 +37,7 @@ trait AttrKeys {
   val `for` = AttrKey("for")
   val id = AttrKey("id")
   val placeholder = AttrKey("placeholder")
-  val checked = Attr("checked")
+  val checked = NoValueAttr("checked")
   val readonly = Attr("readonly")
   val disabled = Attr("disabled")
 }

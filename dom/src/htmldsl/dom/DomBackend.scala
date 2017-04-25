@@ -1,8 +1,8 @@
 package htmldsl.dom
 
-import org.scalajs.dom.raw._
+import org.scalajs.dom.raw.{Element, Text}
 import org.scalajs.dom.document
-import htmldsl.{Attr, Backend, NoAttr}
+import htmldsl.{Attr, Backend, NoAttr, NoValueAttr, ValuedAttr}
 
 object DomBackend extends Backend {
   private var elementUnderConstruction: Option[Element] = None
@@ -17,12 +17,13 @@ object DomBackend extends Backend {
     attrs.foreach {
       case NoAttr =>
       // Do nothing
-      case Attr(name, value) =>
-        element.setAttribute(name, value.getOrElse(""))
+      case ValuedAttr(name, value) =>
+        element.setAttribute(name, value)
+      case NoValueAttr(name) =>
+        element.setAttribute(name, "")
     }
     element
   }
-
 
   override def endElement(tagName: String): Unit = {
     // do nothing

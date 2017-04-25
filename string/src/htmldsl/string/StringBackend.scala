@@ -1,8 +1,8 @@
 package htmldsl.string
 
-import htmldsl.{Attr, Backend, NoAttr}
-import org.scalajs.dom.raw._
+import htmldsl.{Attr, Backend, NoAttr, NoValueAttr, ValuedAttr}
 import org.owasp.encoder.Encode
+import org.scalajs.dom.raw.{Element, Text}
 
 class StringBackend extends Backend {
   val builder = new StringBuilder
@@ -12,9 +12,9 @@ class StringBackend extends Backend {
     attrs.foreach {
       case NoAttr =>
         // Do nothing
-      case Attr(name, Some(value)) =>
+      case ValuedAttr(name, value) =>
         builder.append(s""" $name="${Encode.forHtmlAttribute(value)}"""")
-      case Attr(name, None) =>
+      case NoValueAttr(name) =>
         builder.append(s""" $name""")
     }
     builder.append(">")
