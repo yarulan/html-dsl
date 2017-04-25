@@ -7,8 +7,7 @@ abstract class DslTest extends FreeSpec {
   implicit val backend: Backend
 
   def check(element: Element, expected: String)
-
-  val expectedHtml: String
+  def check(element: Element, stringBackendxpected: String, domBackendxpected: String)
 
   "Dsl should" - {
     "provide nice syntax for" - {
@@ -41,7 +40,10 @@ abstract class DslTest extends FreeSpec {
             })
           })
         })
-        check(f, expectedHtml)
+        check(f,
+          """<form class="form-horizontal"><div class="form-group"><label class="control-label col-sm-2" for="email">Email</label><div class="col-sm-10"><input type="email" class="form-control" id="email" placeholder="Enter email"></input></div></div></form>""",
+          """<form class="form-horizontal"><div class="form-group"><label class="control-label col-sm-2" for="email">Email</label><div class="col-sm-10"><input type="email" class="form-control" id="email" placeholder="Enter email"></div></div></form>"""
+        )
       }
     }
 
@@ -64,6 +66,11 @@ abstract class DslTest extends FreeSpec {
         text("Hello")
       })
       check(e, """<div foo="bar">Hello</div>""")
+    }
+
+    "support conditional rendering of attributes" in {
+      check(div(id := None), """<div></div>""")
+      check(div(id := Some("1")), """<div id="1"></div>""")
     }
   }
 }

@@ -3,7 +3,8 @@ package htmldsl
 case class Attr(name: String, value: String)
 
 case class AttrKey(name: String) {
-  def :=(value: String): Attr = Attr(name, value)
+  def :=(value: String): Option[Attr] = Some(Attr(name, value))
+  def :=(value: Option[String]): Option[Attr] = value.map(Attr(name, _))
 }
 
 trait AttrKeys {
