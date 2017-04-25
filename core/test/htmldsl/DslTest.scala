@@ -72,5 +72,9 @@ abstract class DslTest extends FreeSpec {
       check(div(id := None), """<div></div>""")
       check(div(id := Some("1")), """<div id="1"></div>""")
     }
+
+    "support attributes without values" in {
+      check(input(disabled), """<div></div>""")
+    }
   }
 }

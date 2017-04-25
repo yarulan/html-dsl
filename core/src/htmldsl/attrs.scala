@@ -1,10 +1,14 @@
 package htmldsl
 
-case class Attr(name: String, value: String)
+object Attr {
+  def apply(name: String): Attr = Attr(name, None)
+}
+
+case class Attr(name: String, value: Option[String])
 
 case class AttrKey(name: String) {
-  def :=(value: String): Option[Attr] = Some(Attr(name, value))
-  def :=(value: Option[String]): Option[Attr] = value.map(Attr(name, _))
+  def :=(value: String): Option[Attr] = Some(Attr(name, Some(value)))
+  def :=(value: Option[String]): Option[Attr] = value.map(value => Attr(name, Some(value)))
 }
 
 trait AttrKeys {
@@ -21,8 +25,10 @@ trait AttrKeys {
   val `type` = AttrKey("type")
   val tpe = `type`
 
-
-
   val `for` = AttrKey("for")
   val id = AttrKey("id")
-  val placeholder = AttrKey("placeholder")}
+  val placeholder = AttrKey("placeholder")
+  val checked = Attr("checked")
+  val readonly = Attr("readonly")
+  val disabled = Attr("disabled")
+}

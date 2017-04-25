@@ -9,11 +9,17 @@ class StringBackend extends Backend {
 
   override def beginElement[T <: Element](tagName: String, attrs: Seq[Attr]): T = {
     builder.append(s"<$tagName")
-    attrs.foreach { attr => builder.append(s""" ${attr.name}="${Encode.forHtmlAttribute(attr.value)}"""") }
+    attrs.foreach { attr =>
+      attr.value match {
+        case Some(value) =>
+          builder.append(s""" ${attr.name}="${Encode.forHtmlAttribute(value)}"""")
+        case None =>
+          builder.append(s""" ${attr.name}""")
+      }
+    }
     builder.append(">")
     null.asInstanceOf[T]
   }
-
 
   override def endElement(tagName: String): Unit = {
     builder.append(s"</$tagName>")

@@ -14,7 +14,7 @@ object DomBackend extends Backend {
 
   override def beginElement[T <: Element](tagName: String, attrs: Seq[Attr]): T = {
     val element = document.createElement(tagName).asInstanceOf[T]
-    attrs.foreach(attr => element.setAttribute(attr.name, attr.value))
+    attrs.foreach(attr => element.setAttribute(attr.name, attr.value.getOrElse("")))
     element
   }
 
