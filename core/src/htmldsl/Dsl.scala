@@ -7,7 +7,7 @@ import scala.language.implicitConversions
 object Dsl extends Dsl
 
 trait Dsl extends Object
-  with Tags
+  with HtmlTags
   with AttrKeys
 {
   def tag(name: String, attrs: Seq[Attr], body: => Unit)(implicit backend: Backend): Element = {
