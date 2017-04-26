@@ -69,6 +69,11 @@ abstract class DslTest extends FreeSpec {
         }
         check(f, """<form class="form-horizontal"><div class="form-group"><label class="control-label col-sm-2" for="email">email</label><div class="col-sm-10"><input type="email" class="form-control" id="email" placeholder="enter email"></input></div></div></form>""")
       }
+
+      "nodes with single text child node" in {
+        check(span("hello"), """<span>hello</span>""")
+        check(span(id := "hello", "hello"), """<span id="hello">hello</span>""")
+      }
     }
 
     "allow to use" - {
