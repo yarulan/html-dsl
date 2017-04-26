@@ -15,13 +15,13 @@ lazy val core = defModule("core")
       "org.scalatest" %%% "scalatest" % "3.0.1" % "provided"
     ))
 
-lazy val htmlDsl = defModule(".", "htmlDsl")
+lazy val htmlDsl = defModule(".", "html-dsl")
   .aggregate(core, backends)
 
 lazy val backends = defModule("backends", "backends")
   .aggregate(objectBackend, domBackend)
 
-lazy val objectBackend = defModule("backends/object", "objectBackend")
+lazy val objectBackend = defModule("backends/object", "object-backend")
   .dependsOn(core % "compile->compile;test->test")
   .settings(
     libraryDependencies ++= Seq(
@@ -30,7 +30,7 @@ lazy val objectBackend = defModule("backends/object", "objectBackend")
     )
   )
 
-lazy val domBackend = defModule("backends/dom", "domBackend")
+lazy val domBackend = defModule("backends/dom", "dom-backend")
   .dependsOn(core % "compile->compile;test->test")
   .enablePlugins(ScalaJSPlugin)
   .settings(
