@@ -30,7 +30,8 @@ trait Dsl extends Object
     tag(name, attrs, {})
   }
 
-  def text(value: String)(implicit backend: Backend): Text = {
+  def text(value: String): Text = {
+    val backend = Backend.current
     val node = backend.createTextNode(value)
     backend.getElementUnderConstruction.foreach(_.appendChild(node))
     node
