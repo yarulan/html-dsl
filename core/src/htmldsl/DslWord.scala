@@ -1,6 +1,6 @@
 package htmldsl
 
-import org.scalajs.dom.raw.Element
+import htmldsl.dom.{Element, _}
 
 class DslWord[T <: Element](tagName: String) {
   // Non-leaf elements

@@ -2,7 +2,7 @@ package htmldsl.string
 
 import htmldsl.{Attr, Backend, NoAttr, NoValueAttr, ValuedAttr}
 import org.owasp.encoder.Encode
-import org.scalajs.dom.raw.{Element, Text}
+import htmldsl.dom._
 
 class StringBackend extends Backend {
   val builder = new StringBuilder

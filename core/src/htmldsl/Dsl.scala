@@ -1,6 +1,6 @@
 package htmldsl
 
-import org.scalajs.dom.raw._
+import htmldsl.dom._
 
 import scala.language.implicitConversions
 
@@ -39,6 +39,7 @@ trait Dsl extends Object
   implicit def symbolToAttrKey(symbol: Symbol): AttrKey = AttrKey(symbol.name)
   implicit def stringToDslWord(tagName: String): DslWord[Element] = new DslWord[Element](tagName)
   implicit def symbolToDslWord(tagName: Symbol): DslWord[Element] = new DslWord[Element](tagName.name)
-
-
+  implicit def elementToAppliable[T <: Element](element: Element) = new {
+    def apply(body: => Unit) = ???
+  }
 }

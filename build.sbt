@@ -12,7 +12,6 @@ lazy val core = defModule("core")
   .enablePlugins(ScalaJSPlugin)
   .settings(
     libraryDependencies ++= Seq(
-      "org.scala-js" %%% "scalajs-dom" % "0.9.1",
       "org.scalatest" %%% "scalatest" % "3.0.1" % "provided"
     ))
 

@@ -1,10 +1,16 @@
-package htmldsl.dom
+package htmldsl.backends.dom
 
-import org.scalajs.dom.{Element, document}
-import org.scalatest.Matchers
+import htmldsl.Backend
+import htmldsl.dom._
+import htmldsl.dom.window.document
+import org.scalatest.{BeforeAndAfter, Matchers}
 
-class DomDslTest extends htmldsl.DslTest with Matchers {
+class DomDslTest extends htmldsl.DslTest with Matchers with BeforeAndAfter {
   override implicit val backend = DomBackend
+
+  before {
+    Backend.current = DomBackend
+  }
 
   override def check(element: Element, expected: String): Unit = {
     check(element, null, expected)

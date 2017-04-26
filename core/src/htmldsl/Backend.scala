@@ -1,6 +1,14 @@
 package htmldsl
 
-import org.scalajs.dom.raw.{Element, Text}
+import htmldsl.dom._
+
+object Backend {
+  private val backend = new ThreadLocal[Backend]
+
+  def current: Backend = backend.get()
+
+  private[htmldsl] def current_=(backend: Backend): Unit = this.backend.set(backend)
+}
 
 trait Backend {
   private var elementUnderConstruction: Option[Element] = None

@@ -1,5 +1,5 @@
 package htmldsl.string
-import org.scalajs.dom.Element
+import htmldsl.dom.{Element, _}
 import org.scalatest.Matchers
 
 class StringDslTest extends htmldsl.DslTest with Matchers {
