@@ -63,3 +63,67 @@ div(id := "main", {
     ...
 })
 ```
+
+### fad
+
+The best approach we could find is to make the `apply(body: => Unit)` method
+available on an `Element` through an implicit conversion.
+
+```
+def div: HTMLDivElement = ???
+def div(body: => Any): HTMLDivElement = ???
+def div(attrs: Attr*): HTMLDivElement = ???
+implicit def elementToAppliable[T <: Element](element: Element) = new {
+  def apply(body: => Unit) = ???
+}
+```
+
+That makes best possible DSL
+
+```
+div
+
+div()
+
+div(id := "main")
+
+div {
+}
+
+div() {
+}
+
+div(id := "main") {
+}
+
+div {
+  div
+}
+
+div() {
+  div
+}
+
+div(id := "main") {
+  div
+}
+```
+
+The drawback is that we don't know when to finish element construction,
+cause at the moment of `div()` call we are not sure if there is a body.
+That's not a problem for the dom backend, cause there is no need to finish elements,
+but there is such a need for the incremental dom backend.
+We could store current element somewhere and in the beginning
+of next element construction finish it, but there is no next element for a top level node.
+The solution could be surrounding dsl calls with some another call,
+that finishes the construction of the top level node.
+
+Also we won't be able to pass a backend implicitly, cause the following will fail
+
+```
+div(id := "main") {
+  div
+}
+```
+
+with the type mismatch error: expected `Backend` actual `HTMLDivElement`.
