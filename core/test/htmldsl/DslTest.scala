@@ -1,10 +1,11 @@
 package htmldsl
 
 import htmldsl.dom.{Element, _}
-import org.scalatest.FreeSpec
+import org.scalatest.{FreeSpec, Matchers}
+
 import Predef.{augmentString => _}
 
-abstract class DslTest extends FreeSpec {
+abstract class DslTest extends FreeSpec with Matchers {
   def check(element: Element, expectedHtml: String)
 
   "DSL should" - {

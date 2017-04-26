@@ -4,8 +4,9 @@ import htmldsl.dom._
 
 import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
+import scala.scalajs.js
 
-class ElementImpl(override val tagName: String) extends Element with NodeImpl {
+trait ElementImpl extends Element with NodeImpl {
   private val attrMap = mutable.HashMap[String, String]()
   private val attrList = mutable.ArrayBuffer[(String, String)]()
 
@@ -41,6 +42,14 @@ trait NodeImpl extends Node {
     newChild
   }
 
+  override def removeChild(oldChild: Node): Node = {
+    val i = nodes.indexOf(oldChild)
+    if (i > -1) {
+      nodes.remove(i)
+      oldChild
+    } else null
+  }
+
   override def childNodes: NodeList = new NodeList {
     override def item(index: Int): Node = nodes(index)
 
@@ -59,4 +68,16 @@ trait CharacterDataImpl extends CharacterData with NodeImpl
 object NodeImpl {
   val ELEMENT_NODE = 1
   val TEXT_NODE = 3
+}
+
+trait HTMLElementImpl extends HTMLElement with ElementImpl {
+  override var onkeydown: js.Function1[KeyboardEvent, _] = _
+  override var onkeyup: js.Function1[KeyboardEvent, _] = _
+  override var onkeypress: js.Function1[KeyboardEvent, _] = _
+  override var onclick: js.Function1[MouseEvent, _] = _
+}
+
+class HTMLInputElementImpl extends HTMLInputElement with HTMLElementImpl {
+  override var value: String = _
+  override def tagName: String = "input"
 }

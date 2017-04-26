@@ -1,12 +1,21 @@
 package htmldsl.backends.`object`
 
-import htmldsl.backends.`object`.dom.{ElementImpl, TextImpl}
+import htmldsl.backends.`object`.dom.{ElementImpl, HTMLInputElementImpl, TextImpl}
 import htmldsl.{Attr, Backend, NoAttr, NoValueAttr, ValuedAttr}
 import htmldsl.dom.{Element, Text}
 
 object ObjectBackend extends Backend {
   override def beginElement[T <: Element](tagName: String, attrs: Seq[Attr]): T = {
-    val element = new ElementImpl(tagName)
+    val element = tagName match {
+      case "input" =>
+        new HTMLInputElementImpl
+      case _ =>
+        val s = tagName
+        new ElementImpl {
+          override def tagName: String = s
+        }
+    }
+
     attrs.foreach {
       case NoAttr =>
         // Do nothing

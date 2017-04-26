@@ -5,6 +5,7 @@ import scala.scalajs.js
 @js.native
 trait Node extends EventTarget {
   def appendChild(newChild: Node): Node
+  def removeChild(oldChild: Node): Node
   def childNodes: NodeList
   def attributes: NamedNodeMap
   def nodeType: Int

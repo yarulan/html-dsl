@@ -1,6 +1,6 @@
 package htmldsl
 
-import htmldsl.dom.Element
+import htmldsl.dom.{Element, HTMLInputElement}
 
 trait HtmlTags {
   val html = new DslWord[Element]("html")
@@ -33,7 +33,7 @@ trait HtmlTags {
 
   val form = new DslWord[Element]("form")
   val label = new DslWord[Element]("label")
-  val input = new DslWord[Element]("input")
+  val input = new DslWord[HTMLInputElement]("input")
   val button = new DslWord[Element]("button")
 
   val b = new DslWord[Element]("b")
