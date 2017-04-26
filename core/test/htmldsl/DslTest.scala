@@ -4,12 +4,9 @@ import htmldsl.dom.{Element, _}
 import org.scalatest.FreeSpec
 
 abstract class DslTest extends FreeSpec {
-  implicit val backend: Backend
+  def check(element: Element, expectedHtml: String)
 
-  def check(element: Element, expected: String)
-  def check(element: Element, stringBackendExpected: String, domBackendExpected: String)
-
-  "DSL should allow to use" - {
+  "DSL should provide nice syntax for" - {
     "just tags" in {
       val e = div
       check(e, """<div></div>""")
@@ -20,7 +17,7 @@ abstract class DslTest extends FreeSpec {
       check(e, """<div></div>""")
     }
 
-    "tags with attributes" in {
+    "tags with attrs" in {
       val e = div(id := "main")
       check(e, """<div id="main"></div>""")
     }
@@ -34,20 +31,34 @@ abstract class DslTest extends FreeSpec {
       val e = div() {}
       check(e, """<div></div>""")
     }
+
+    "tags with attrs and empty body" in {
+      val e = div(id := "main") {}
+      check(e, """<div id="main"></div>""")
+    }
+
+    "tags with children" in {
+      val e = div {
+        div
+      }
+      check(e, """<div><div></div></div>""")
+    }
+
+    "tags with empty parens with children" in {
+      val e = div() {
+        div
+      }
+      check(e, """<div><div></div></div>""")
+    }
+
+    "tags with attrs with children" in {
+      val e = div(id := "main") {
+        div
+      }
+      check(e, """<div id="main"><div></div></div>""")
+    }
   }
 
-//    div {
-//    }
-//    div() {
-//    }
-//    div(id := "main") {
-//    }
-//    div {
-//      div
-//    }
-//    div() {
-//      div
-//    }
 //    div(id := "main") {
 //      div
 //    }

@@ -2,23 +2,15 @@ package htmldsl
 
 import htmldsl.dom.{Element, _}
 
+import Util.buildElement
+
 object HtmlTags extends HtmlTags
 
 trait HtmlTags {
-  def div: Element = {
-    val backend = Backend.current
-    backend.beginElement[Element]("div", Seq())
-  }
-  def div(body: => Any): Element = {
-    val backend = Backend.current
-    val e = backend.beginElement[Element]("div", Seq())
-    body
-    e
-  }
-  def div(attrs: Attr*): Element = {
-    val backend = Backend.current
-    backend.beginElement[Element]("div", attrs)
-  }
+  def div: Element = buildElement[Element]("div", Seq.empty, {})
+  def div(body: => Any): Element = buildElement[Element]("div", Seq.empty, body)
+  def div(attrs: Attr*): Element = buildElement[Element]("div", attrs, {})
+
 //  val html = new DslWord[HTMLElement]("html") // TODO: no corresponding element
 //
 //  val head = new DslWord[HTMLHeadElement]("head")

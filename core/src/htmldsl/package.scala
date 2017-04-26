@@ -1,1 +1,2 @@
-package object htmldsl extends Imports
+package object htmldsl extends Imports {
+}

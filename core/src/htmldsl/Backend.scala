@@ -12,6 +12,7 @@ object Backend {
 
 trait Backend {
   private var elementUnderConstruction: Option[Element] = None
+  var lastConstructedNode: Option[Element] = None
 
   def setElementUnderConstruction(element: Option[Element]): Unit = {
     elementUnderConstruction = element

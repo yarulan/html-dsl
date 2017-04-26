@@ -9,6 +9,7 @@ object Dsl extends Dsl
 trait Dsl extends Object
   with HtmlTags
   with AttrKeys
+  with Implicits
 {
   def tag(name: String, attrs: Seq[Attr], body: => Unit)(implicit backend: Backend): Element = {
     val element = backend.beginElement[Element](name, attrs)
@@ -33,13 +34,5 @@ trait Dsl extends Object
     val node = backend.createTextNode(value)
     backend.getElementUnderConstruction.foreach(_.appendChild(node))
     node
-  }
-
-  implicit def stringToAttrKey(attrName: String): AttrKey = AttrKey(attrName)
-  implicit def symbolToAttrKey(symbol: Symbol): AttrKey = AttrKey(symbol.name)
-  implicit def stringToDslWord(tagName: String): DslWord[Element] = new DslWord[Element](tagName)
-  implicit def symbolToDslWord(tagName: Symbol): DslWord[Element] = new DslWord[Element](tagName.name)
-  implicit def elementToAppliable[T <: Element](element: Element) = new {
-    def apply(body: => Unit) = ???
   }
 }
