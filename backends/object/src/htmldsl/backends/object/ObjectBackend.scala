@@ -1,6 +1,6 @@
 package htmldsl.backends.`object`
 
-import htmldsl.backends.`object`.dom.{ElementImpl, HTMLInputElementImpl, TextImpl}
+import htmldsl.backends.`object`.dom.{ElementImpl, HTMLElementImpl, HTMLInputElementImpl, TextImpl}
 import htmldsl.{Attr, Backend, NoAttr, NoValueAttr, ValuedAttr}
 import htmldsl.dom.{Element, Text}
 
@@ -9,9 +9,9 @@ object ObjectBackend extends Backend {
     val element = tagName match {
       case "input" =>
         new HTMLInputElementImpl
-      case _ =>
+      case whatever =>
         val s = tagName
-        new ElementImpl {
+        new HTMLElementImpl {
           override def tagName: String = s
         }
     }
