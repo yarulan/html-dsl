@@ -31,7 +31,7 @@ trait HtmlTags {
   val ul = new DslWord[HTMLUListElement]("ul")
   val li = new DslWord[HTMLLIElement]("li")
 
-  val form = new DslWord[HTMLFormElement]("form")
+  val form = new DslWordForElementWithApply[HTMLFormElement]("form")
   val label = new DslWord[HTMLLabelElement]("label")
   val input = new DslWord[HTMLInputElement]("input")
   val button = new DslWord[HTMLButtonElement]("button")
