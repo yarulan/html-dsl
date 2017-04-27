@@ -127,3 +127,23 @@ div(id := "main") {
 ```
 
 with the type mismatch error: expected `Backend` actual `HTMLDivElement`.
+
+
+
+
+
+
+
+
+
+
+
+
+This
+```
+form() {
+    imput()
+}
+```
+fails, cause `HTMLFormElement` returned by `form()` call already has an `apply()` method,
+so our implicit doesn't work.

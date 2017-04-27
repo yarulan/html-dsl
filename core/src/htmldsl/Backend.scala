@@ -1,6 +1,6 @@
 package htmldsl
 
-import htmldsl.dom._
+import org.scalajs.dom.raw.{Element, Text}
 
 object Backend {
   private val backend = new ThreadLocal[Backend]

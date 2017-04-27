@@ -1,6 +1,6 @@
 package htmldsl
 
-import htmldsl.dom.{Element, Node, Text}
+import org.scalajs.dom.raw.{Element, Node, Text}
 
 import scala.language.implicitConversions
 
@@ -18,6 +18,8 @@ trait Implicits {
   }
 
   implicit def nodeToRenderable(node: Node): RenderableNodeWrapper = new RenderableNodeWrapper(node)
+
+  implicit def holderToElement[T <: Element](holder: Holder[T]): T = holder.element
 }
 
 class AppliableNodeWrapper[T <: Element](val node: T) extends AnyVal {

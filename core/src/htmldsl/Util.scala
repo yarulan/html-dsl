@@ -1,6 +1,6 @@
 package htmldsl
 
-import htmldsl.dom.Element
+import org.scalajs.dom.raw.Element
 
 private object Util {
   def escapeHtml(html: String): String = {

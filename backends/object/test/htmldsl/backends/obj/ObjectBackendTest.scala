@@ -1,8 +1,8 @@
 package htmldsl.backends.obj
 
 import htmldsl.backends.`object`.ObjectBackend
-import htmldsl.dom.Element
 import htmldsl.{Backend, DslTest, nodeToRenderable}
+import org.scalajs.dom.raw.Element
 import org.scalatest.{BeforeAndAfter, Matchers}
 
 class ObjectBackendTest extends DslTest with Matchers with BeforeAndAfter {

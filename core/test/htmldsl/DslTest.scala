@@ -1,6 +1,6 @@
 package htmldsl
 
-import htmldsl.dom.{Element, _}
+import org.scalajs.dom.raw.Element
 import org.scalatest.{FreeSpec, Matchers}
 
 import Predef.{augmentString => _}
