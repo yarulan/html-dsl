@@ -18,6 +18,9 @@ lazy val core = defModule("core")
 
 lazy val htmlDsl = defModule(".", "html-dsl")
   .aggregate(core, backends, fooJS, fooJVM)
+  .settings(
+    ideExcludedDirectories := Seq(file("node_modules"))
+  )
 
 lazy val backends = defModule("backends", "backends")
   .aggregate(objectBackend, domBackend)
